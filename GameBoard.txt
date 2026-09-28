@@ -1,0 +1,39 @@
+
+const initalGameBoard = [
+    [null,null,null],
+    [null,null,null],
+    [null,null,null]
+]
+export default function GameBoard ({ onSelectSquare , truns}){
+
+let GameBoard = initalGameBoard;
+
+for (const turn of turns){
+    const {squiry , player} = turn;
+    const { row , cal } = squiry;
+
+    GameBoard[row , cal] = player
+}
+// const [GameBoard , setGameBoard] = useState (initalGameBoard)   
+// function handelGameBoard (rowindex, colindex){
+//     setGameBoard((prevGameBord)=>{{
+//         const updatedBoard = [...prevGameBord.map(innerArray => [...innerArray])];
+//         updatedBoard[rowindex][colindex] = activePlayerSymbol;
+//         return updatedBoard;
+//     }})
+//     onSelectSquare();
+// }
+    return(
+        <ol id="game-board"> 
+            {GameBoard.map((row , rowindex)=>(
+                <li key={rowindex}>
+                    <ol>
+                        {row.map((playerSymbol,colindex)=>(
+                            <li key={colindex}><button onClick={onSelectSquare}>{playerSymbol}</button></li>
+                        ))}
+                    </ol>
+                </li>
+            ))}
+        </ol>
+    );
+}
